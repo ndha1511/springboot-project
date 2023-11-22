@@ -3,32 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Update</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="container">
         <form th:object="${product}" th:action="@{/product/save}" method="post">
-            <label>
-                <input th:field="*{id}" readonly>
+            <label> ID:
+                <input th:field="*{id}" readonly class="form-control">
             </label>
-            <label>
-                <input th:field="*{manufacturerName}">
+            <label> Manufacturer name:
+                <input th:field="*{manufacturerName}" class="form-control">
             </label>
-            <label>
-                <input th:field="*{name}">
+            <label> Name:
+                <input th:field="*{name}" class="form-control">
             </label>
-            <label>
-                <input th:field="*{description}">
+            <label> Description:
+                <input th:field="*{description}" class="form-control">
             </label>
-            <label>
-                <select th:field="*{status}">
+            <label> Status:
+                <select th:field="*{status}" class="form-control">
                     <option value="ACTIVE">ACTIVE</option>
                     <option value="INACTIVE">IN ACTIVE</option>
                     <option value="PAUSE">PAUSE</option>
                 </select>
             </label>
-            <label>
+            <label> Unit: <br>
                 <input th:field="*{unit}">
             </label>
+            <br>
             <input type="submit" value="Update">
         </form>
     </div>
