@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Product</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-    <div class="container">
-        <table>
+    <div class="container container-fluid">
+        <table class="table table-hover">
             <tr>
                 <th>id</th>
                 <th>manufacturer name</th>
@@ -14,6 +18,9 @@
                 <th>description</th>
                 <th>status</th>
                 <th>unit</th>
+                <th></th>
+                <th></th>
+                <th></th>
             </tr>
             <tr th:each="product : ${products}">
                 <td th:text="${product.getId()}"></td>
@@ -23,12 +30,16 @@
                 <td th:text="${product.getStatus()}"></td>
                 <td th:text="${product.getUnit()}"></td>
                 <td><a th:href="@{/product/update/{id}(id = ${product.id})}">Update</a></td>
-                <td><button>Delete</button></td>
+                <td><a th:href="@{/product/delete/{id}(id = ${product.id})}">Delete</a></td>
+                <td><a th:href="@{/product/detail/{id}(id = ${product.id})}">Detail</a></td>
             </tr>
         </table>
         <div th:each="i: ${#numbers.sequence(0, pageSize - 1)}" style="display: inline-block">
             <a th:text="${i + 1}" th:href="@{/product(pageNumber = ${i})}"></a>
         </div>
+        <a th:href="@{/product/checkout}">Checkout</a>
+
+        <a th:href="@{/product/add}" class="btn btn-success">Add new product</a>
     </div>
 </body>
 </html>

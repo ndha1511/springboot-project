@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert product</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container container-fluid">
+        <form th:object="${product}" th:action="@{/product/save}" method="post">
+            <div class="form-group">
+                <label for="name">Product name: </label>
+                <input id="name" th:field="*{name}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="manufacturer">Manufacturer name: </label>
+                <input id="manufacturer" th:field="*{manufacturerName}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="description">Description: </label>
+                <input id="description" th:field="*{description}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="unit">Unit: </label>
+                <input id="unit" th:field="*{unit}" class="form-control">
+            </div>
+            <input type="submit" value="Save" class="btn btn-primary">
+        </form>
+    </div>
+</body>
+</html>

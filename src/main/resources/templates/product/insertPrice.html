@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Price</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container container-fluid">
+        <form th:action="@{/product/savePrice/{id}(id = ${productId})}" th:object="${productPrice}" method="post">
+            <div class="form-group">
+                <label for="note">Note: </label>
+                <input id="note" th:field="*{note}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="price">Price: </label>
+                <input id="price" th:field="*{price}" class="form-control" type="number">
+            </div>
+            <input type="submit" value="Save" class="btn btn-success">
+        </form>
+    </div>
+</body>
+</html>

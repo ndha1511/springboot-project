@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .lbl {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div style="display: flex; flex-direction: row;">
+        <div>
+            <label for="toDate" class="lbl">To date: </label>
+            <input id="toDate" type="date">
+            <br>
+            <label for="fromDate" class="lbl">From date: </label>
+            <input id="fromDate" type="date">
+            <br>
+            <button onclick="search()">Thống kê theo khoảng thời gian</button>
+        </div>
+        <div style="margin-left: 30px">
+            <label for="date" class="lbl">Date: </label>
+            <input id="date" type="date">
+            <br>
+            <button onclick="searchDate()">Thống kê theo ngày</button>
+        </div>
+
+    </div>
+
+
+    <div th:if="${orders} != null">
+        <table class="table table-hover">
+            <tr>
+                <th>OrderId</th>
+                <th>CustomerId</th>
+                <th>EmployeeId</th>
+                <th>OrderDate</th>
+            </tr>
+            <tr th:each="order: ${orders}">
+                <td th:text="${order.id}"></td>
+                <td th:text="${order.customer.id}"></td>
+                <td th:text="${order.employee.id}"></td>
+                <td th:text="${order.orderDate}"></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        const search = () => {
+            const toDate = document.getElementById("toDate").value;
+            const fromDate = document.getElementById("fromDate").value;
+            location.href = '/order/dates?fromDate='+fromDate+'&toDate='+toDate;
+        }
+
+        const searchDate = () => {
+            const date = document.getElementById("date").value;
+            location.href = '/order/date?date='+date;
+        }
+
+    </script>
+</body>
+</html>

@@ -6,24 +6,28 @@
 </head>
 <body>
     <div class="container">
-        <form th:object="${product}" th:action="@{/product/update}" method="post">
+        <form th:object="${product}" th:action="@{/product/save}" method="post">
             <label>
-                <input th:value="*{id}" readonly>
+                <input th:field="*{id}" readonly>
             </label>
             <label>
-                <input th:value="*{manufacturerName}">
+                <input th:field="*{manufacturerName}">
             </label>
             <label>
-                <input th:value="*{name}">
+                <input th:field="*{name}">
             </label>
             <label>
-                <input th:value="*{description}">
+                <input th:field="*{description}">
             </label>
             <label>
-                <input th:value="*{status}">
+                <select th:field="*{status}">
+                    <option value="ACTIVE">ACTIVE</option>
+                    <option value="INACTIVE">IN ACTIVE</option>
+                    <option value="PAUSE">PAUSE</option>
+                </select>
             </label>
             <label>
-                <input th:value="*{unit}">
+                <input th:field="*{unit}">
             </label>
             <input type="submit" value="Update">
         </form>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product detail</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div th:object="${product}">
+            id: <span th:text="*{id}" id="productId"></span> <br>
+            manufacturerName: <span th:text="*{manufacturerName}"></span> <br>
+            name: <span th:text="*{name}" id="productName"></span> <br>
+            description: <span th:text="*{description}"></span> <br>
+            status: <span th:text="*{status}"></span> <br>
+            unit: <span th:text="*{unit}"></span> <br>
+        </div>
+    <div th:if="${productPrices != null}">
+        <table class="table table-hover">
+            <tr>
+                <th>price_date_time</th>
+                <th>note</th>
+                <th>price</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr th:each="productPrice: ${productPrices}">
+                <td th:text="${productPrice.priceDateTime}"></td>
+                <td th:text="${productPrice.note}"></td>
+                <td th:text="${productPrice.price}"></td>
+                <td><a>Update</a></td>
+                <td><a>Delete</a></td>
+            </tr>
+        </table>
+
+        <input type="hidden" th:value="${productPrice.price}" id="price">
+        <label for="quantity"></label>
+        <input id="quantity" type="number">
+        <button class="btn btn-primary" onclick="addToCart()">Add to cart</button>
+    </div>
+        <a th:href="@{/product/price/{id}(id = ${product.id})}" class="btn btn-success">Insert Price</a>
+
+
+
+    </div>
+    <script>
+        const addToCart = () => {
+            const quantity = document.getElementById("quantity").value
+            const price = document.getElementById("price").value
+            const productId = document.getElementById("productId").textContent
+            const productName = document.getElementById("productName").textContent
+            const data = {
+                productId,
+                productName,
+                price,
+                quantity
+            }
+            fetch('/product/cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    location.href = '/product';
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        }
+    </script>
+</body>
+</html>
